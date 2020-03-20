@@ -1,0 +1,10 @@
+name: 'Check for failure labels'
+description: 'Create a failure status if specified labels are present on PR'
+inputs:
+  labels-to-fail:
+    description: 'Labels to fail'
+    required: true
+    default: 'status: blocked'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
