@@ -5,6 +5,9 @@ inputs:
     description: 'Labels to fail'
     required: true
     default: 'status: blocked'
+  repo-token:
+    description: GitHub token
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
