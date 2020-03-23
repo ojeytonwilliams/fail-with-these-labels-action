@@ -11,6 +11,14 @@ try {
   let {
     pull_request: { labels: prLabels }
   } = github.context.payload;
+
+  
+// ockokit.checks.listForRef({
+//   owner,
+//   repo,
+//   ref
+// });
+  // merge_commit_sha;
   prLabels = prLabels.map(({ name }) => name);
   const failedLabelsFound = prLabels.filter(labelName =>
     labelsToFail.includes(labelName)
@@ -18,9 +26,22 @@ try {
   if (failedLabelsFound.length) {
     const labels = failedLabelsFound.join(", ");
     console.log(`Labels to Fail found: ${labels}`);
-    throw new Error(`Labels to Fail found: ${labels}`);
+    throw new Error(`
+    Labels to Fail found:
+    ${labels}
+     ${github.context.payload.merge_commit_sha}
+    ${github.context.ref}
+    ${github.context.sha}
+    ${JSON.stringify(github.context.repo)}
+    `);
+  } else {
+    throw new Error(`
+    Success
+    ${github.context.payload.merge_commit_sha}
+    ${github.context.ref}
+    ${github.context.sha}
+    ${JSON.stringify(github.context.repo)}`)
   }
-  process.exit(0);
 } catch (error) {
   core.setFailed(error.message);
 }
