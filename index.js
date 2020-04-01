@@ -21,6 +21,8 @@ try {
   const octokit = new github.GitHub(myToken);
   const { owner, repo } = github.context.repo;
   console.log('running checks')
+  console.log('context', github.context)
+  console.log('github', github)
   octokit.checks
     .listForRef({
       owner,
