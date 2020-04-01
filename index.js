@@ -27,7 +27,7 @@ try {
     .listForRef({
       owner,
       repo,
-      ref: github.event.pull_request.head.sha
+      ref: github.context.sha
     })
     .then(data => {
       console.log("status checks");
