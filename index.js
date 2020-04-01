@@ -21,7 +21,6 @@ try {
   const octokit = new github.GitHub(myToken);
   const { owner, repo } = github.context.repo;
   console.log('running checks')
-  console.log('start of token', myToken.slice(0,3))
   octokit.checks
     .listForRef({
       owner,
@@ -47,10 +46,10 @@ try {
       }
     })
     .catch(err => {
-      core.error(err);
-      core.setFailed(error);
+      core.error(err.toString());
+      core.setFailed(err.toString());
     });
 } catch (error) {
-  core.error(error);
-  core.setFailed(error);
+  core.error(error.toString());
+  core.setFailed(error.toString());
 }
