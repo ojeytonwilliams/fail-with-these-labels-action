@@ -42,6 +42,7 @@ const github = require("@actions/github");
       throw new Error(`Labels to Fail found: ${labels}`);
     }
   } catch (error) {
-    core.setFailed(error.message);
+    core.error(error);
+    core.setFailed(error);
   }
 })();
